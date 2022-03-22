@@ -239,6 +239,9 @@ func (p *LocalPathProvisioner) Provision(opts pvController.ProvisionOptions) (*v
 	return &v1.PersistentVolume{
 		ObjectMeta: metav1.ObjectMeta{
 			Name: name,
+			Labels: map[string]string{
+				"local-path-node": node.Name,
+			},
 		},
 		Spec: v1.PersistentVolumeSpec{
 			PersistentVolumeReclaimPolicy: *opts.StorageClass.ReclaimPolicy,
